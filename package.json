@@ -1,0 +1,25 @@
+{
+  "name": "node_express_skeleton",
+  "version": "1.0.0",
+  "description": "basic node boilerplate",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolffles/node_express_skeleton.git"
+  },
+  "author": "Wolfgang Truong (http://github.com/wolffles)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wolffles/node_express_skeleton/issues"
+  },
+  "homepage": "https://github.com/wolffles/node_express_skeleton#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
