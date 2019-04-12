@@ -1,10 +1,12 @@
 # Node/Express Skeleton
 Basic node server with notes on things to add.
 ### TODO LIST
-* add post routes models
+* use skeleton to make a new app
 
-* checklist for project
-  - package.json (change name)
+## Checklist to be project ready
+  - clone
+  - package.json (change name of app)
+  - change name of directories
   - npm install
 
 ## Node backend API returns JSON(webservices no rendering)
@@ -53,63 +55,63 @@ router.post('/comment/:post_id', passport.authenticate('jwt', {session: false}),
 ### Setting up Schema for Mongo
  * models/Users.js (convention for model files are capitalized)
  * example of a schema:
- ```
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+```
+  const mongoose = require('mongoose');
+  const Schema = mongoose.Schema;
 
-//We're making a post model where if user deletes post the comments don't delete unless user deletes it.
+  //We're making a post model where if user deletes post the comments don't delete unless user deletes it.
 
-//Create Schema
-const PostSchema = new Schema({
-    user: {
-            type: Schema.Types.ObjectId,
-            ref: 'users'
-    },
-    text: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String
-    },
-    avatar: {
-        type: String
-    },
-    likes: [
-        {
-            user: {
-                type: Schema.Types.ObjectId,
-                ref: 'users'
-            }
-        }
-    ],
-    comments: [
-        {
-            user: {
-                type: Schema.Types.ObjectId,
-                ref: 'users'
-            },
-            text: {
-                type: String,
-                required: true
-            },
-            name: {
-                type: String
-            },
-            avatar: {
-                type: String
-            },
-            date: {
-                type: Date,
-                default: Date.now
-            }
-        }
-    ]
-});
-// exporting a variable called Post its a mongoose model( , schema)
-module.exports = Post = mongoose.model('post', PostSchema);
+  //Create Schema
+  const PostSchema = new Schema({
+      user: {
+              type: Schema.Types.ObjectId,
+              ref: 'users'
+      },
+      text: {
+          type: String,
+          required: true
+      },
+      name: {
+          type: String
+      },
+      avatar: {
+          type: String
+      },
+      likes: [
+          {
+              user: {
+                  type: Schema.Types.ObjectId,
+                  ref: 'users'
+              }
+          }
+      ],
+      comments: [
+          {
+              user: {
+                  type: Schema.Types.ObjectId,
+                  ref: 'users'
+              },
+              text: {
+                  type: String,
+                  required: true
+              },
+              name: {
+                  type: String
+              },
+              avatar: {
+                  type: String
+              },
+              date: {
+                  type: Date,
+                  default: Date.now
+              }
+          }
+      ]
+  });
+  // exporting a variable called Post its a mongoose model( , schema)
+  module.exports = Post = mongoose.model('post', PostSchema);
 
- ```
+```
 
 ### Validation
 
@@ -129,7 +131,7 @@ module.exports = Post = mongoose.model('post', PostSchema);
 * create the validation files.
 * sample users route with registration file. 
 
-  ```
+```
 const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
@@ -161,37 +163,37 @@ router.post('/register', (req, res) => {
             if(user) {
                 return res.status(400).json({email: 'Email already exists'});
             } else {
-                     const avatar = gravatar.url(
-                       req.body.email,
-                       {
-                         s: "200", // Size
-                         r: "pg", //rating
-                         d: "mm" //Default
-                       }
-                     );
-                     // avatar: avatar in es6 you can just put 1 if they're the same
-                     const newUser = new User({
-                       name: req.body.name,
-                       email: req.body.email,
-                       avatar, // avatar: avatar
-                       password: req.body.password
-                     });
+                    const avatar = gravatar.url(
+                      req.body.email,
+                      {
+                        s: "200", // Size
+                        r: "pg", //rating
+                        d: "mm" //Default
+                      }
+                    );
+                    // avatar: avatar in es6 you can just put 1 if they're the same
+                    const newUser = new User({
+                      name: req.body.name,
+                      email: req.body.email,
+                      avatar, // avatar: avatar
+                      password: req.body.password
+                    });
 
-                     bcrypt.genSalt(10, (err, salt) => {
-                       bcrypt.hash(
-                         newUser.password,
-                         salt,
-                         (err, hash) => {
-                           if (err) console.log(err);
-                           newUser.password = hash;
-                           newUser
-                             .save()
-                             .then(user => res.json(user))
-                             .catch(err => console.log(err));
-                         }
-                       );
-                     });
-                   }
+                    bcrypt.genSalt(10, (err, salt) => {
+                      bcrypt.hash(
+                        newUser.password,
+                        salt,
+                        (err, hash) => {
+                          if (err) console.log(err);
+                          newUser.password = hash;
+                          newUser
+                            .save()
+                            .then(user => res.json(user))
+                            .catch(err => console.log(err));
+                        }
+                      );
+                    });
+                  }
         });
 });
 
@@ -267,7 +269,7 @@ router.get('/current',
 })
 
 module.exports = router;
-  ```
+```
 
 
 
